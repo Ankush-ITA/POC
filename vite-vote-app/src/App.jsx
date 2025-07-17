@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
-      <h1>Vote Counter</h1>
+      <h1>Ankush Counter</h1>
       <p>Votes: {votes}</p>
       <button onClick={() => setVotes(votes + 1)}>Upvote</button>
       <button onClick={() => setVotes(votes - 1)} style={{ marginLeft: '10px' }}>Downvote</button>
