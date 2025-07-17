@@ -55,6 +55,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
+            IMAGE_URI=${{ env.IMAGE_URI }}
             docker pull $IMAGE_URI
             docker stop vite-container || true
             docker rm vite-container || true
