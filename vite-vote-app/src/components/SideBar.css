@@ -1,0 +1,43 @@
+.sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  border-right: 1px solid #ddd;
+  padding: 10px;
+}
+
+.sidebar-item {
+  padding: 12px;
+  cursor: pointer;
+  color: #333;
+}
+
+.sidebar-item.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.sidebar-item:hover {
+  background-color: #ddd;
+}
+
+@media screen and (max-width: 768px) {
+  .sidebar {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #f9f9f9;
+    z-index: 999;
+    border-top: 1px solid #ddd;
+  }
+
+  .sidebar.mobile-visible {
+    display: block;
+  }
+
+  .sidebar-item {
+    padding: 14px 20px;
+    border-bottom: 1px solid #eee;
+  }
+}

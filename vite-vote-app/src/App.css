@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px;
+  background-color: #9b9b9b21;
+  overflow-y: auto;
+}
+
+
+@media screen and (max-width: 768px) {
+  .content {
+    flex-direction: column; 
+  }
+
+  .main-content {
+    padding: 16px;
+  }
+}
