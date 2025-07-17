@@ -40,8 +40,9 @@ jobs:
       - name: Build Docker image
         run: |
           IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:latest
-          docker build -t $IMAGE_URI .
+          docker build -t $IMAGE_URI ./vite-vote-app
           echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
+
 
       - name: Push Docker image to ECR
         run: docker push $IMAGE_URI
