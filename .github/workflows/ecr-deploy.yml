@@ -31,9 +31,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./vite-vote-app
 
       - name: Build Vite project
         run: npm run build
+        working-directory: ./vite-vote-app
 
       - name: Build Docker image
         run: |
@@ -43,5 +45,3 @@ jobs:
 
       - name: Push Docker image to ECR
         run: docker push $IMAGE_URI
-
-     
