@@ -37,16 +37,17 @@ jobs:
         run: npm run build
         working-directory: ./vite-vote-app
 
+      - name: Set image tag
+        run: echo "IMAGE_TAG=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
       - name: Build Docker image
         run: |
-          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:latest
+          IMAGE_URI=${{ steps.login-ecr.outputs.registry }}/${{ secrets.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
           docker build --no-cache -t $IMAGE_URI ./vite-vote-app
           echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_ENV
 
-
       - name: Push Docker image to ECR
         run: docker push $IMAGE_URI
-
 
       - name: SSH and deploy on server
         uses: appleboy/ssh-action@v1.0.0
@@ -59,13 +60,10 @@ jobs:
             export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
             export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
             export AWS_REGION=$AWS_REGION
-      
+
             aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${{ steps.login-ecr.outputs.registry }}
-      
+
             docker pull $IMAGE_URI
             docker stop vite-container || true
             docker rm vite-container || true
             docker run -d -p 80:80 --name vite-container $IMAGE_URI
-
-
-
